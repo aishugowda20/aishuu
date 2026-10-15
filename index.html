@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chai Katte – Your Evening, Your Snacks!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--turmeric:#FFC93C;--saffron:#F28A1E;--chai:#B5651D;--brown:#3B2314;--cream:#FFF6DC;--card:#FFFDF5;--green:#1F8A4C}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Nunito,system-ui,sans-serif;background:var(--cream);color:var(--brown);line-height:1.6}
+h1,h2,h3,.logo{font-family:'Baloo 2',Nunito,sans-serif;line-height:1.15}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brown);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:8px}
+.sub{max-width:56ch;margin-bottom:32px;opacity:.85}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 1rem Nunito,sans-serif;padding:12px 24px;border-radius:999px;background:var(--brown);color:var(--cream);text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-2px);background:#5a3620}
+.btn.alt{background:var(--saffron);color:var(--brown)}
+.btn.wa{background:var(--green);color:#fff}
+.btn.sm{padding:8px 18px;font-size:.9rem}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:var(--turmeric);border-bottom:3px solid var(--brown)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.7rem;font-weight:800;text-decoration:none}
+.nav ul{display:flex;gap:22px;list-style:none;padding:0}
+.nav ul a{text-decoration:none;font-weight:700}
+.nav ul a:hover{text-decoration:underline}
+.cart-btn{position:relative}
+.cart-btn b{position:absolute;top:-8px;right:-8px;background:#d62828;color:#fff;border-radius:50%;min-width:22px;height:22px;font-size:.75rem;display:grid;place-items:center}
+.burger{display:none;background:none;border:0;font-size:1.8rem;cursor:pointer}
+@media(max-width:760px){
+ .burger{display:block}
+ .nav ul{display:none;position:absolute;top:64px;left:0;right:0;background:var(--turmeric);flex-direction:column;padding:16px 20px;border-bottom:3px solid var(--brown)}
+ .nav ul.open{display:flex}
+}
+
+/* hero */
+.hero{background:var(--turmeric);padding:56px 0 90px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800}
+.hero p{font-size:1.15rem;margin:16px 0 28px;max-width:44ch}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.glass{position:relative;justify-self:center;width:min(300px,70vw);aspect-ratio:1;background:var(--saffron);border:4px solid var(--brown);border-radius:50% 50% 46% 46%;display:grid;place-items:center;font-size:7.5rem;box-shadow:8px 8px 0 var(--brown)}
+.glass .steam{position:absolute;top:-34px;font-size:2rem;letter-spacing:12px;animation:steam 3s ease-in-out infinite}
+.glass .chip{position:absolute;font-size:2.6rem;animation:float 4s ease-in-out infinite}
+.chip.a{left:-18px;bottom:20px}.chip.b{right:-14px;top:30px;animation-delay:1s}.chip.c{right:10px;bottom:-24px;animation-delay:2s}
+@keyframes steam{0%,100%{opacity:.2;transform:translateY(8px)}50%{opacity:1;transform:translateY(-8px)}}
+@keyframes float{50%{transform:translateY(-10px) rotate(8deg)}}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:34px;background:radial-gradient(circle at 20px 0,transparent 18px,var(--cream) 19px) 0 0/40px 34px repeat-x}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr;text-align:center}.hero p{margin-inline:auto}.hero .cta{justify-content:center}}
+
+/* menu */
+.tools{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+#search{flex:1;min-width:220px;padding:12px 18px;border-radius:999px;border:2px solid var(--brown);font:inherit;background:var(--card)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{border:2px solid var(--brown);background:transparent;color:var(--brown);font:700 .95rem Nunito;padding:8px 16px;border-radius:999px;cursor:pointer}
+.filters button.on{background:var(--brown);color:var(--cream)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.card{background:var(--card);border:2px solid var(--brown);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:6px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:5px 5px 0 var(--saffron)}
+.thumb{height:130px;border-radius:14px;background:linear-gradient(135deg,var(--turmeric),var(--saffron));display:grid;place-items:center;font-size:4rem;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.card h3{font-size:1.2rem;margin-top:6px}
+.card small{opacity:.75;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{font:800 1.3rem 'Baloo 2'}
+.empty{grid-column:1/-1;text-align:center;padding:32px;opacity:.8}
+
+/* offers */
+.offers{background:var(--brown);color:var(--cream)}
+.offers .sub{opacity:.9}
+.ogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.offer{background:var(--turmeric);color:var(--brown);border-radius:22px;padding:24px;border:3px dashed var(--brown);outline:3px solid var(--turmeric);outline-offset:-9px}
+.offer .tag{font:800 2rem 'Baloo 2'}
+.offer p{margin:6px 0 14px}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pill{background:var(--card);border:2px solid var(--brown);border-radius:20px;padding:16px}
+.pill b{display:block;font:800 1.1rem 'Baloo 2'}
+@media(max-width:760px){.about .wrap{grid-template-columns:1fr}}
+
+/* reviews */
+.reviews{background:var(--turmeric)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.rev{background:var(--card);border:2px solid var(--brown);border-radius:22px;padding:22px}
+.stars{color:var(--saffron);letter-spacing:2px}
+.rev cite{display:block;margin-top:10px;font-weight:700;font-style:normal}
+
+/* contact */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.cgrid ul{list-style:none;padding:0;display:grid;gap:14px}
+.map{border:2px solid var(--brown);border-radius:22px;min-height:260px;display:grid;place-items:center;text-align:center;padding:20px;background:var(--card)}
+@media(max-width:760px){.cgrid{grid-template-columns:1fr}}
+footer{background:var(--brown);color:var(--cream);padding:40px 0 28px;text-align:center}
+footer .social{display:flex;gap:18px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+footer a{text-decoration:none;font-weight:700}
+footer a:hover{text-decoration:underline}
+.float-wa{position:fixed;left:16px;bottom:16px;z-index:15}
+
+/* cart drawer */
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--card);border-left:3px solid var(--brown);z-index:40;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer header{position:static;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+#items{flex:1;overflow:auto;padding:16px 20px}
+.line{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px dashed var(--chai)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:50%;border:2px solid var(--brown);background:var(--cream);cursor:pointer;font-weight:800}
+#foot{padding:16px 20px;border-top:3px solid var(--brown);display:grid;gap:10px}
+#foot input{padding:10px 14px;border-radius:12px;border:2px solid var(--brown);font:inherit}
+.total{display:flex;justify-content:space-between;font:800 1.3rem 'Baloo 2'}
+#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--brown);color:var(--cream);padding:10px 22px;border-radius:999px;z-index:50;transition:transform .3s}
+#toast.show{transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="wrap nav">
+  <a class="logo" href="#home">☕ Chai Katte</a>
+  <ul id="links">
+   <li><a href="#menu">Menu</a></li><li><a href="#offers">Offers</a></li>
+   <li><a href="#about">About</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:10px;align-items:center">
+   <button class="btn sm cart-btn" id="openCart" aria-label="Open cart">🛒 Cart <b id="count">0</b></button>
+   <button class="burger" id="burger" aria-label="Toggle menu">☰</button>
+  </div>
+ </div>
+</header>
+
+<main id="home">
+<div class="hero">
+ <div class="wrap">
+  <div>
+   <h1>Your Evening, Your Snacks!</h1>
+   <p>Hot chai, crispy bajji and fresh samosas, made after college, after office, after school. Pocket-friendly and always fresh.</p>
+   <div class="cta"><a class="btn" href="#menu">See the menu</a><a class="btn wa" id="heroWa" href="#">Order on WhatsApp</a></div>
+  </div>
+  <div class="glass" aria-hidden="true"><span class="steam">♨ ♨ ♨</span>🍵<span class="chip a">🥟</span><span class="chip b">🌶️</span><span class="chip c">🍟</span></div>
+ </div>
+</div>
+
+<section id="menu"><div class="wrap">
+ <h2>Today's menu</h2>
+ <p class="sub">Search or filter, then add to your cart. All prices in ₹.</p>
+ <div class="tools">
+  <input id="search" type="search" placeholder="Search samosa, momos, chai…" aria-label="Search menu">
+  <div class="filters" id="filters"></div>
+ </div>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="offers" id="offers"><div class="wrap">
+ <h2>Special offers</h2>
+ <p class="sub">Show your college ID at the counter for student prices.</p>
+ <div class="ogrid" id="ogrid"></div>
+</div></section>
+
+<section class="about" id="about"><div class="wrap">
+ <div>
+  <h2>About Chai Katte</h2>
+  <p>A katte is where the neighbourhood meets. We started Chai Katte to give students, families and office workers a clean, friendly place for fresh evening snacks that don't cost a fortune.</p>
+  <p style="margin-top:12px">Everything is fried in fresh oil, made in small batches and served hot. Our mission is simple: fresh, hygienic and affordable, every single evening.</p>
+ </div>
+ <div class="pills">
+  <div class="pill"><b>Fresh daily</b>Made in small batches</div>
+  <div class="pill"><b>Hygienic</b>Clean kitchen, gloves and caps</div>
+  <div class="pill"><b>Affordable</b>Snacks from ₹15</div>
+  <div class="pill"><b>Quick</b>Ready in about 10 minutes</div>
+ </div>
+</div></section>
+
+<section class="reviews" id="reviews"><div class="wrap">
+ <h2>What our customers say</h2>
+ <p class="sub">Sample reviews. Replace them with your own.</p>
+ <div class="rgrid">
+  <div class="rev"><div class="stars">★★★★★</div><p>Best masala chai near campus, and the samosa combo is a lifesaver at month end.</p><cite>Ananya, engineering student</cite></div>
+  <div class="rev"><div class="stars">★★★★★</div><p>Hot, crispy and clean. We stop here with the kids every Friday for momos.</p><cite>Ravi, parent</cite></div>
+  <div class="rev"><div class="stars">★★★★☆</div><p>Quick service after work. The mirchi bajji with ginger chai is perfect on rainy days.</p><cite>Meena, office worker</cite></div>
+ </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+ <h2>Visit us</h2>
+ <p class="sub">Walk in, call, or message us on WhatsApp.</p>
+ <div class="cgrid">
+  <ul>
+   <li>📞 <b>Phone:</b> <a id="phoneLink" href="#"></a></li>
+   <li>📍 <b>Shop:</b> <span id="addr"></span></li>
+   <li>🕓 <b>Open:</b> <span id="hours"></span></li>
+   <li><a class="btn wa" id="contactWa" href="#">Chat on WhatsApp</a></li>
+  </ul>
+  <div class="map">Add your Google Maps embed or link here.<br>Tip: Google Maps → Share → Embed a map.</div>
+ </div>
+</div></section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div class="logo">☕ Chai Katte</div>
+  <p>Your Evening, Your Snacks!</p>
+  <div class="social">
+   <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+   <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+   <a id="footWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <small>© <span id="yr"></span> Chai Katte. All rights reserved.</small>
+ </div>
+</footer>
+
+<a class="btn wa float-wa" id="floatWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+
+<aside id="drawer" aria-label="Shopping cart">
+ <header><h3>Your order</h3><button class="btn sm" id="closeCart">Close</button></header>
+ <div id="items"></div>
+ <div id="foot">
+  <div class="total"><span>Total</span><span id="total">₹0</span></div>
+  <input id="cname" placeholder="Your name (optional)">
+  <button class="btn wa" id="checkout">Send order on WhatsApp</button>
+  <button class="btn sm alt" id="clear">Clear cart</button>
+ </div>
+</aside>
+<div id="toast" role="status"></div>
+
+<script>
+/* ===== EDIT YOUR DETAILS HERE ===== */
+const SHOP = {
+  name: "Chai Katte",
+  whatsapp: "919999999999",          // country code + number, no + or spaces
+  phoneDisplay: "+91 99999 99999",
+  address: "12, College Road, Your Area, Bengaluru – 560001",
+  hours: "Mon–Sun, 4:00 PM – 10:00 PM"
+};
+/* img: optional photo path, e.g. "images/samosa.jpg" (leave "" to show the emoji) */
+const MENU = [
+  {id:1, name:"Samosa (2 pcs)",   cat:"Fried",      price:20, emoji:"🥟", desc:"Crispy pastry, spiced potato filling", img:""},
+  {id:2, name:"Onion Bajji",      cat:"Fried",      price:30, emoji:"🧅", desc:"Gram-flour fritters, golden and hot", img:""},
+  {id:3, name:"Mirchi Bajji",     cat:"Fried",      price:30, emoji:"🌶️", desc:"Stuffed chilli fritters", img:""},
+  {id:4, name:"Mixed Pakoda",     cat:"Fried",      price:40, emoji:"🍤", desc:"Onion, potato and spinach pakoda", img:""},
+  {id:5, name:"Veg Sandwich",     cat:"Sandwiches", price:40, emoji:"🥪", desc:"Toasted with chutney and veggies", img:""},
+  {id:6, name:"Cheese Sandwich",  cat:"Sandwiches", price:60, emoji:"🧀", desc:"Grilled, loaded with melted cheese", img:""},
+  {id:7, name:"French Fries",     cat:"Fried",      price:50, emoji:"🍟", desc:"Salted, with peri-peri on request", img:""},
+  {id:8, name:"Veg Momos (6)",    cat:"Momos",      price:50, emoji:"🥟", desc:"Steamed, with spicy red chutney", img:""},
+  {id:9, name:"Fried Momos (6)",  cat:"Momos",      price:60, emoji:"🥠", desc:"Crunchy outside, juicy inside", img:""},
+  {id:10,name:"Masala Chai",      cat:"Drinks",     price:15, emoji:"🍵", desc:"Cardamom, ginger and strong tea", img:""},
+  {id:11,name:"Ginger Chai",      cat:"Drinks",     price:15, emoji:"☕", desc:"Extra ginger, perfect on rainy days", img:""},
+  {id:12,name:"Filter Coffee",    cat:"Drinks",     price:20, emoji:"☕", desc:"Frothy South Indian style", img:""}
+];
+/* Combos are added to the cart as normal items */
+const OFFERS = [
+  {id:101, tag:"₹30", title:"Student Combo", desc:"Samosa (2 pcs) + Masala Chai. Show your college ID.", price:30, emoji:"🎓"},
+  {id:102, tag:"₹80", title:"Friends Combo", desc:"Veg Momos + French Fries + 2 Chai. Save ₹15.", price:80, emoji:"👫"},
+  {id:103, tag:"₹60", title:"Evening Special (4–6 PM)", desc:"Mixed Pakoda + Chai + Filter Coffee. Happy-hour price.", price:60, emoji:"🌇"}
+];
+/* ===== END OF EDITABLE SECTION ===== */
+
+const $ = s => document.querySelector(s);
+const wa = msg => `https://wa.me/${SHOP.whatsapp}${msg?'?text='+encodeURIComponent(msg):''}`;
+let cart = {}, cat = "All", q = "";
+
+// contact + links
+["heroWa","contactWa","footWa","floatWa"].forEach(i => { const el=$("#"+i); el.href = wa(`Hi ${SHOP.name}! I'd like to place an order.`); el.target="_blank"; el.rel="noopener"; });
+$("#phoneLink").textContent = SHOP.phoneDisplay; $("#phoneLink").href = "tel:+" + SHOP.whatsapp;
+$("#addr").textContent = SHOP.address; $("#hours").textContent = SHOP.hours; $("#yr").textContent = new Date().getFullYear();
+
+// nav
+$("#burger").onclick = () => $("#links").classList.toggle("open");
+$("#links").onclick = () => $("#links").classList.remove("open");
+
+// menu
+const cats = ["All", ...new Set(MENU.map(m => m.cat))];
+$("#filters").innerHTML = cats.map(c => `<button class="${c==='All'?'on':''}" data-c="${c}">${c}</button>`).join("");
+$("#filters").onclick = e => { const c=e.target.dataset.c; if(!c) return; cat=c; document.querySelectorAll("#filters button").forEach(b=>b.classList.toggle("on",b.dataset.c===c)); renderMenu(); };
+$("#search").oninput = e => { q = e.target.value.trim().toLowerCase(); renderMenu(); };
+
+function thumb(m){ return `<div class="thumb">${m.img ? `<img src="${m.img}" alt="${m.name}" loading="lazy">` : `<span aria-hidden="true">${m.emoji}</span>`}</div>`; }
+function renderMenu(){
+  const list = MENU.filter(m => (cat==="All"||m.cat===cat) && (m.name+" "+m.desc+" "+m.cat).toLowerCase().includes(q));
+  $("#grid").innerHTML = list.length ? list.map(m => `
+    <article class="card">${thumb(m)}<h3>${m.name}</h3><small>${m.desc}</small>
+    <div class="row"><span class="price">₹${m.price}</span><button class="btn sm" data-add="${m.id}">Add</button></div></article>`).join("")
+    : `<p class="empty">No snacks match "${q}". Try another word or choose All.</p>`;
+}
+$("#grid").onclick = e => { if(e.target.dataset.add) add(+e.target.dataset.add); };
+
+// offers
+$("#ogrid").innerHTML = OFFERS.map(o => `<div class="offer"><div class="tag">${o.emoji} ${o.tag}</div><h3>${o.title}</h3><p>${o.desc}</p><button class="btn sm" data-add="${o.id}">Add combo</button></div>`).join("");
+$("#ogrid").onclick = e => { if(e.target.dataset.add) add(+e.target.dataset.add); };
+
+// cart
+const ALL = [...MENU, ...OFFERS.map(o => ({id:o.id, name:o.title, price:o.price}))];
+const find = id => ALL.find(x => x.id === id);
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),1600); }
+function add(id){ cart[id]=(cart[id]||0)+1; save(); toast(find(id).name+" added"); }
+function change(id,d){ cart[id]=(cart[id]||0)+d; if(cart[id]<=0) delete cart[id]; save(); }
+function save(){ try{localStorage.setItem("ck_cart",JSON.stringify(cart))}catch(e){} renderCart(); }
+function renderCart(){
+  const ids = Object.keys(cart).map(Number);
+  const total = ids.reduce((s,id)=>s+find(id).price*cart[id],0);
+  $("#count").textContent = ids.reduce((s,id)=>s+cart[id],0);
+  $("#total").textContent = "₹"+total;
+  $("#items").innerHTML = ids.length ? ids.map(id => { const m=find(id); return `<div class="line"><div><b>${m.name}</b><br><small>₹${m.price} each</small></div>
+    <div class="qty"><button data-d="-1" data-id="${id}" aria-label="Remove one">−</button><span>${cart[id]}</span><button data-d="1" data-id="${id}" aria-label="Add one">+</button></div></div>`; }).join("")
+    : `<p class="empty">Your cart is empty. Add a snack from the menu.</p>`;
+}
+$("#items").onclick = e => { const b=e.target.closest("button[data-id]"); if(b) change(+b.dataset.id, +b.dataset.d); };
+$("#openCart").onclick = () => $("#drawer").classList.add("open");
+$("#closeCart").onclick = () => $("#drawer").classList.remove("open");
+$("#clear").onclick = () => { cart={}; save(); };
+$("#checkout").onclick = () => {
+  const ids = Object.keys(cart).map(Number);
+  if(!ids.length){ toast("Add something to your cart first"); return; }
+  const total = ids.reduce((s,id)=>s+find(id).price*cart[id],0);
+  const name = $("#cname").value.trim();
+  const msg = `Hi ${SHOP.name}! New order${name?" from "+name:""}:\n` + ids.map(id=>`• ${find(id).name} x${cart[id]} = ₹${find(id).price*cart[id]}`).join("\n") + `\nTotal: ₹${total}`;
+  window.open(wa(msg), "_blank");
+};
+try{ cart = JSON.parse(localStorage.getItem("ck_cart")) || {}; }catch(e){ cart = {}; }
+renderMenu(); renderCart();
+</script>
+</body>
+</html>
